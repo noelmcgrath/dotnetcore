@@ -1,0 +1,101 @@
+// Tried to create instance on new VPC - Didnt work, no DNS or Public IP
+
+
+// Link we followed to install .NET core on linux
+https://www.microsoft.com/net/core#ubuntu
+
+// Created install.sh to install .net core
+
+// Copy script up to instance
+cd d:\utilities\putty
+./pscp.exe -r -i C:\Users\bstack\Downloads\billynoel1404.ppk D:\temp\netcoreinv\install.sh ubuntu@ec2-35-161-73-129.us-west-2.compute.amazonaws.com:/home/ubuntu
+
+
+Run the install script
+chmod 755 *.sh
+./install.sh
+
+
+
+apt-get install inotify-tools
+inotifywait -m -r .
+
+
+/usr/share/dotnet
+apt-get install tree	
+
+	host
+		fxr
+			1.0.1
+	sdk
+		dotnet.dll
+		csc.dll
+		
+		
+	shared
+		Microsoft.NETCore.App
+			1.0.1
+				*.dll
+				e.g. System.IO.dll
+
+Talk about this ...
+
+
+dotnet --version
+
+
+// Create hello world app in csharp
+mkdir hwappcs
+cd hwappcs
+dotnet new
+
+Creates Program.cs  and project.json file
+
+
+// Talk about history??? - State of the union
+
+dotnet run - whats actually happening???
+
+what is in project.json
+why is project.json being gotten rid of?
+
+
+
+The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:
+dotnet restore
+After .net restore, why does it create project.lock.json while not updating project.json?
+
+dotnet run
+	creates the following structure:
+	bin
+		Debug
+			netcoreapp1.0
+				app.deps.json
+				app.dll
+				app.pdb
+				app.runtimeconfig.dev.json
+				app.runtimeconfig.json
+	obj
+		Debug
+			netcoreapp1.0
+				dotnet-compile.assemblyinfo.cs
+				dotnet-compile-csc.rsp
+				dotnet-compile.rsp
+				
+				
+mkdir hwappfs
+cd hwappfs
+dotnet new --lang f#
+Creates Program.fs  and project.json file
+
+dotnet restore
+Seems to install more - but this is what Microsoft.Core
+
+
+When dotnet restores, where do the versioned dependency packages go?cd ~
+
+
+dotnet commands review????
+problems for us with nuget - we may have to embrace??
+
+
