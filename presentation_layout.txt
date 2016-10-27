@@ -1,0 +1,36 @@
+History
+	State of the union
+	of .net core
+	F#
+Install of dotnet core
+	- What changes were made on the box
+
+Hello world in c#/f#
+	-will include run/restore etc
+	
+Other dotnet commands
+
+Project structure
+	- project.json and future
+	- lock file
+	- nuget packages location
+		
+Web application, c# asp.net app hosted by kestrel with nginx reverse proxy
+	- Add two nums
+	- Get ubuntu free tier ui up and running 
+
+	- Visual Studio Code
+		- Ionide
+		- Intellisense
+
+	- Kestrel
+		- Working with IIS
+		- Whats missing
+		- Etc
+	
+Web application, f# suave app hosted by kestrel
+	- Data layer, json type provider
+	- Etc
+	
+Conclusion/Roadmap going forward
+
