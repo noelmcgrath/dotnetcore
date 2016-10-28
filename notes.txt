@@ -1,4 +1,4 @@
-// Tried to create instance on new VPC - Didnt work, no DNS or Public IP
+/// Tried to create instance on new VPC - Didnt work, no DNS or Public IP
 
 
 // Link we followed to install .NET core on linux
