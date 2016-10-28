@@ -1,0 +1,144 @@
+ASP.NET Core and .NET Core Overview
+
+November 2016
+
+
+* Outline
+- History
+- ASP.NET Core and .NET Core Overview
+- .NET Core and .NET Framework
+- RoadMap
+- Setup
+- Hello world
+- dotnet commands
+- Web applicaion
+- Tools and IDE
+
+
+* Will not cover
+- F# application
+
+
+* History
+Where things are at right now?
+- ASP.NET 5 is now ASP.NET Core 1.0.
+- .NET Core 5 is now .NET Core 1.0.
+- Entity Framework 7 is now Entity Framework Core 1.0
+.image asp.jpg
+.link http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx
+
+
+* History continued
+ASP.NET Core 1.0 - What has changed?
+- ASP.NET Core 1.0 is a complete re-write. There is no System.Web anymore 
+- Strategically so important to Microsoft
+- Open source and cross platform
+.link https://dusted.codes/understanding-aspnet-core-10-aka-aspnet-5-and-why-it-will-replace-classic-aspnet
+
+
+* ASP.NET Core and .NET Core Overview
+- Long journey since 2014, with a lot of dramatic changes along the way, vnext, dnx etc
+- .NET Core 1.0.0 released 6/27/2016
+- .NET Core 1.1.0 Preview 1 released 10/24/2016
+.link https://github.com/dotnet/core/tree/master/release-notes
+.link https://github.com/aspnet/home/releases
+
+
+* ASP.NET Core and .NET Core Overview continued
+.image AspNetCoreToday.jpg
+.link https://weblog.west-wind.com/posts/2016/Jun/13/ASPNET-Core-and-NET-Core-Overview
+
+* Building a Common.NET (.NET Standard)
+- Current state of .NET there are a lot of different yet similar .NET runtimes
+- .NET Core is the key to moving to a single .NET Standard. Provide a core base line for the .NET framework across all platforms
+- Core and Mono end up merging
+.image NetPlatformOverviewTomorrow.jpg
+
+
+* Differences between .NET Core and .NET Framework
+- NuGet-based
+- TODO
+.link https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/
+
+
+* ASP.NET Core 1.0 or ASP.NET 4.6?
+- ASP.NET Core works with two runtime environment (.NET Core and .NET Framework)
+- ASP.NET 4.6 is more mature
+- Exciting stuff is going to be happening on the .NET Core platform
+- Limited third party support.
+.link http://www.jeffreyfritz.com/2016/08/should-i-use-asp-net-core-or-mvc-5/
+
+
+* Core Parts
+- TODO CLI, library etc
+- Possibly many slides here
+
+
+* Roadmap
+- TODO
+- Where things are at with F#
+- https://weblog.west-wind.com/posts/2016/Jun/29/First-Steps-Exploring-NET-Core-and-ASPNET-Core
+- https://weblog.west-wind.com/posts/2016/Jun/06/Publishing-and-Running-ASPNET-Core-Applications-with-IIS
+
+
+* Setup
+- See https://www.microsoft.com/net/core#ubuntu
+.code ./install.sh
+
+
+* What was installed
+- apt-get install tree
+-  tree /usr/share/dotnet
+- TODO show pic of overall
+- Size
+
+
+* Hello world C#
+.code createhelloworld.sh
+- Explain files created
+- Program.cs and project.json file
+- project.json going away, why?
+- Explain dotnet commands
+- Explain future of project.json
+
+* project.json file
+- Explain future of project.json
+- project.json going away, why?
+- Introduction of .NET Platform Standard to share code across .NET application models
+- -Make it easy to work with projects across these application models
+.link http://www.talkingdotnet.com/news-project-json-asp-net-core-going-away/
+
+
+* Hello world F#
+- TODO - script
+
+
+* dotnet commands
+- The dotnet.exe command line tools combine compiler, runtime loaders, package management and deployment into a single, easy to use environment that is accessible with single commands
+- Work the same on all the Operating Systems
+- dotnet new
+- dotnet restore
+- dotnet run
+- TODO Link and examples
+
+
+* Web application
+- Build web application
+- Kestrel
+- nginx as reverse proxy
+- IIS on Windows
+
+
+* Demo
+
+
+* Tools and IDE's
+ Visual Studio Code
+ Ionide
+ yoeman? templates
+
+
+* Links
+- TODO Maybe not reqiured
+
+
