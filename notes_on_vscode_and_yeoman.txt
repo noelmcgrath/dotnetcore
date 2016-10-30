@@ -1,0 +1,18 @@
+Browse to https://code.visualstudio.com/ to download vscode
+
+Browse to http://yeoman.io/codelab/setup.html to set up yeoman
+
+Commands used:
+	
+npm install --global npm@latest
+npm install --global yo
+
+
+
+set strict-ssl false (we had an issue with certs)
+
+
+
+We started to follow this tutorial:
+	https://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html
+	

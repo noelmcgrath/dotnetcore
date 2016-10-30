@@ -1,9 +1,10 @@
-ASP.NET Core and .NET Core Overview
+.NET Core Overview
 
-November 2016
+Billy Stack/Noel McGrath
+02 November 2016
 
 
-* Outline
+* Outline TODO: Revisit after all other slides have been done
 - History
 - ASP.NET Core and .NET Core Overview
 - .NET Core and .NET Framework
@@ -16,7 +17,8 @@ November 2016
 
 
 * Will not cover
-- F# application
+- F# in general
+- ASP.NET in detail
 
 
 * History
@@ -44,10 +46,44 @@ ASP.NET Core 1.0 - What has changed?
 .link https://github.com/aspnet/home/releases
 
 
-* ASP.NET Core and .NET Core Overview continued
+* .NET Core Explained
 .image AspNetCoreToday.jpg
 .link https://weblog.west-wind.com/posts/2016/Jun/13/ASPNET-Core-and-NET-Core-Overview
 
+* Core CLR
+.link https://github.com/dotnet/coreclr
+- Contains the following:
+- .NET Core runtime, called CoreCLR
+- the base library, called mscorlib. It includes
+- the garbage collector, 
+- JIT compiler, 
+- base .NET data types
+- many low-level classes
+- TODO: Read more about codebase	
+	
+* Core API (CoreFX)
+.link https://github.com/dotnet/corefx
+- This repo contains:
+- .NET Core foundational libraries
+- Classes for collections, file systems, console, XML, async and many others
+.link https://docs.microsoft.com/en-us/dotnet/core/api/index (Note DataSet in index but not in codebase)
+
+
+* Language compilers
+--------------------
+The .NET Compiler Platform ("Roslyn") provides open-source C# and Visual Basic compilers with rich code analysis APIs.
+https://github.com/dotnet/roslyn
+https://github.com/dotnet/roslyn
+https://github.com/Microsoft/visualfsharp
+https://github.com/fsharp/fsharp
+
+
+.NET CLI
+.link https://github.com/dotnet/cli
+ - This repo contains the .NET Core command-line (CLI) tools, used for building .NET Core apps and libraries through your development flow
+ - Show dotnet build
+
+ 
 * Building a Common.NET (.NET Standard)
 - Current state of .NET there are a lot of different yet similar .NET runtimes
 - .NET Core is the key to moving to a single .NET Standard. Provide a core base line for the .NET framework across all platforms
@@ -57,8 +93,19 @@ ASP.NET Core 1.0 - What has changed?
 
 * Differences between .NET Core and .NET Framework
 - NuGet-based
-- TODO
+- .NET Core is modular, unlike .NET Framework, .NET Core relies on its package manager to receive updates.
+- Can be included in your app or installed side-by-side user- or machine-wide
 .link https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/
+
+
+* Differences between .NET Core and .NET Framework continued
+- Making cross platform version of the .NET framework required some hard work and sacrifices.
+- Main reasons for a feature of .NET to not appear in .NET Core
+- 1. Wasn’t enough time to port a feature to .NET core
+- 2. Might not make sense for a cross platform library 
+- 3. Some technologies in.NET that have been around for 15+ years and are not going to move forward
+.image netcorechanges_3.jpg
+.link http://odetocode.com/blogs/scott/archive/2016/10/11/asp-net-core-and-the-enterprise-part-1ndashframeworks.aspx
 
 
 * ASP.NET Core 1.0 or ASP.NET 4.6?
@@ -69,48 +116,26 @@ ASP.NET Core 1.0 - What has changed?
 .link http://www.jeffreyfritz.com/2016/08/should-i-use-asp-net-core-or-mvc-5/
 
 
-* Core Parts
-- TODO CLI, library etc
-- Possibly many slides here
-
-
-* Roadmap
-- TODO
-- Where things are at with F#
-- https://weblog.west-wind.com/posts/2016/Jun/29/First-Steps-Exploring-NET-Core-and-ASPNET-Core
-- https://weblog.west-wind.com/posts/2016/Jun/06/Publishing-and-Running-ASPNET-Core-Applications-with-IIS
-
-
-* Setup
+* Setup SDK on Ubuntu
 - See https://www.microsoft.com/net/core#ubuntu
 .code ./install.sh
-
-
-* What was installed
 - apt-get install tree
 -  tree /usr/share/dotnet
-- TODO show pic of overall
-- Size
 
 
-* Hello world C#
+* Hello world C#/F#
 .code createhelloworld.sh
 - Explain files created
 - Program.cs and project.json file
 - project.json going away, why?
 - Explain dotnet commands
 - Explain future of project.json
+- Demo same with f#
 
 * project.json file
 - Explain future of project.json
-- project.json going away, why?
-- Introduction of .NET Platform Standard to share code across .NET application models
-- -Make it easy to work with projects across these application models
+- Make it easy to work with projects across these application models
 .link http://www.talkingdotnet.com/news-project-json-asp-net-core-going-away/
-
-
-* Hello world F#
-- TODO - script
 
 
 * dotnet commands
@@ -119,7 +144,7 @@ ASP.NET Core 1.0 - What has changed?
 - dotnet new
 - dotnet restore
 - dotnet run
-- TODO Link and examples
+- TODO Fill out more, Link and examples BS
 
 
 * Web application
@@ -129,16 +154,49 @@ ASP.NET Core 1.0 - What has changed?
 - IIS on Windows
 
 
-* Demo
-
-
 * Tools and IDE's
- Visual Studio Code
- Ionide
- yoeman? templates
+- Visual Studio Code
+- Ionide
+- yoeman? templates
+- PUT IN CMDS bs for install
 
 
-* Links
-- TODO Maybe not reqiured
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kestrel
+Memory Pool
+	Pinned memory - cant move
+	Pool of memory slabs - reduce numer of allocations
+First requests result in allocations
+Later requests reuse
+
+
+Socket input custom awaiter
+	libuv (running its own threads) (bits coming off the wire) passes data to Kestrel via async callbacks**
+	need to marshal data between libuv and your code(.net)
+	
+	
+Consuming, producing all going on on one single tcp connection
+
+ReUsing known strings
+	http verbs - first 8 bytes as long
+	reuse string
+
+Ben adams - Kestrel guy
+	
+	
+https://vimeo.com/172009499
 
 
