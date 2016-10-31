@@ -21,8 +21,23 @@ Billy Stack/Noel McGrath
 - ASP.NET in detail
 
 
-* History
-Where things are at right now?
+* The journey
+- June 2014
+- Started receiving requests for “.NET on Linux”
+- Windows Nano future, much smaller server product.
+- Started Project K
+- Many renames, change in direction along the way, dnx, vnext etc.
+
+
+* What happened along the .NET Core journey
+- ASP.NET Core 1.0 is a complete re-write. 
+- There is no System.Web anymore 
+- Strategically so important to Microsoft
+- Open source and cross platform
+.link https://dusted.codes/understanding-aspnet-core-10-aka-aspnet-5-and-why-it-will-replace-classic-aspnet
+
+
+* Naming change
 - ASP.NET 5 is now ASP.NET Core 1.0.
 - .NET Core 5 is now .NET Core 1.0.
 - Entity Framework 7 is now Entity Framework Core 1.0
@@ -30,16 +45,7 @@ Where things are at right now?
 .link http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx
 
 
-* History continued
-ASP.NET Core 1.0 - What has changed?
-- ASP.NET Core 1.0 is a complete re-write. There is no System.Web anymore 
-- Strategically so important to Microsoft
-- Open source and cross platform
-.link https://dusted.codes/understanding-aspnet-core-10-aka-aspnet-5-and-why-it-will-replace-classic-aspnet
-
-
 * ASP.NET Core and .NET Core Overview
-- Long journey since 2014, with a lot of dramatic changes along the way, vnext, dnx etc
 - .NET Core 1.0.0 released 6/27/2016
 - .NET Core 1.1.0 Preview 1 released 10/24/2016
 .link https://github.com/dotnet/core/tree/master/release-notes
@@ -49,6 +55,7 @@ ASP.NET Core 1.0 - What has changed?
 * .NET Core Explained
 .image AspNetCoreToday.jpg
 .link https://weblog.west-wind.com/posts/2016/Jun/13/ASPNET-Core-and-NET-Core-Overview
+
 
 * Core CLR
 .link https://github.com/dotnet/coreclr
@@ -61,6 +68,7 @@ ASP.NET Core 1.0 - What has changed?
 - many low-level classes
 - TODO: Read more about codebase	
 	
+
 * Core API (CoreFX)
 .link https://github.com/dotnet/corefx
 - This repo contains:
@@ -70,15 +78,14 @@ ASP.NET Core 1.0 - What has changed?
 
 
 * Language compilers
---------------------
-The .NET Compiler Platform ("Roslyn") provides open-source C# and Visual Basic compilers with rich code analysis APIs.
-https://github.com/dotnet/roslyn
-https://github.com/dotnet/roslyn
-https://github.com/Microsoft/visualfsharp
-https://github.com/fsharp/fsharp
+-The .NET Compiler Platform ("Roslyn") provides open-source C# and Visual Basic compilers with rich code analysis APIs.
+- https://github.com/dotnet/roslyn
+- https://github.com/dotnet/roslyn
+- https://github.com/Microsoft/visualfsharp
+- https://github.com/fsharp/fsharp
 
 
-.NET CLI
+* .NET CLI
 .link https://github.com/dotnet/cli
  - This repo contains the .NET Core command-line (CLI) tools, used for building .NET Core apps and libraries through your development flow
  - Show dotnet build
@@ -86,15 +93,18 @@ https://github.com/fsharp/fsharp
  
 * Building a Common.NET (.NET Standard)
 - Current state of .NET there are a lot of different yet similar .NET runtimes
-- .NET Core is the key to moving to a single .NET Standard. Provide a core base line for the .NET framework across all platforms
-- Core and Mono end up merging
+- Moving to a single .NET Standard. Provide a core base line across all platforms
+- Defines uniform set of BCL APIs for all .NET platforms to implement
+- Produce libraries that are usable across .NET runtimes, using same set of APIs.
 .image NetPlatformOverviewTomorrow.jpg
 
 
 * Differences between .NET Core and .NET Framework
-- NuGet-based
+- .NET Core is a platform made of NuGet packages
+- Fine-grained packages can ship on their own schedule.
 - .NET Core is modular, unlike .NET Framework, .NET Core relies on its package manager to receive updates.
 - Can be included in your app or installed side-by-side user- or machine-wide
+- Metapackages - Microsoft.NETCore.App
 .link https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/
 
 
@@ -109,6 +119,7 @@ https://github.com/fsharp/fsharp
 
 
 * ASP.NET Core 1.0 or ASP.NET 4.6?
+- It depends
 - ASP.NET Core works with two runtime environment (.NET Core and .NET Framework)
 - ASP.NET 4.6 is more mature
 - Exciting stuff is going to be happening on the .NET Core platform
@@ -151,7 +162,31 @@ https://github.com/fsharp/fsharp
 - Build web application
 - Kestrel
 - nginx as reverse proxy
-- IIS on Windows
+- netstat -ta
+
+
+* Kestrel
+- It is  a fast cross-platform web server
+- Builds on top of libuv, a cross-platform library for asynchronous I/O. 
+- It is not a fully featured web server (request filtering, URL rewrites, etc.)
+- In production use reverse proxy in front of it
+- Builds on top of libuv, a cross-platform library for asynchronous I/O. 
+- It is run behind IIS using the HttpPlatformHandler.
+- More features being added.
+
+
+* Kestrel performance
+.image performance.jpg
+- Benchmarks
+.link https://github.com/aspnet/benchmarks
+.link https://www.techempower.com/blog/2016/02/24/performance-competition-is-a-good-thing/
+
+
+* Kestrel and IIS
+- New HTTP handler named aspNetCore
+- Configure via web.config
+- In the past application is hosted inside of an IIS Worker Process (w3wp.exe) which is the IIS Application Pool.
+.image IISHosting.jpg
 
 
 * Tools and IDE's
@@ -161,42 +196,10 @@ https://github.com/fsharp/fsharp
 - PUT IN CMDS bs for install
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Kestrel
-Memory Pool
-	Pinned memory - cant move
-	Pool of memory slabs - reduce numer of allocations
-First requests result in allocations
-Later requests reuse
-
-
-Socket input custom awaiter
-	libuv (running its own threads) (bits coming off the wire) passes data to Kestrel via async callbacks**
-	need to marshal data between libuv and your code(.net)
-	
-	
-Consuming, producing all going on on one single tcp connection
-
-ReUsing known strings
-	http verbs - first 8 bytes as long
-	reuse string
-
-Ben adams - Kestrel guy
-	
-	
-https://vimeo.com/172009499
-
-
+* Conclusions
+- Noel
+- Possiby too early, e.g. mongodb driver only just released
+- Wait for others to jump in
+- F# is a no, with not mention on the roadmap either
+- Billy 
+- TODO
