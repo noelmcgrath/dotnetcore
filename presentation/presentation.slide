@@ -58,22 +58,33 @@ Billy Stack/Noel McGrath
 
 
 * Core CLR
-.link https://github.com/dotnet/coreclr
 - Contains the following:
 - .NET Core runtime, called CoreCLR
 - the base library, called mscorlib. It includes
 - the garbage collector, 
 - JIT compiler, 
 - base .NET data types
-- many low-level classes
-- TODO: Read more about codebase	
-	
+.link https://github.com/dotnet/coreclr
+
+* Core CLR continued
+- 2.6 million lines of code
+	- Within that count, the JIT is about 320K lines and the GC about 55
+- Includes large collections of C++ and C# code
+- Includes tools that do not ship with Visual Studio, e.g. depends on CMake for building C#/C++ code
+- Very good documentation
+- Might do a deep dive into this
+- Includes a number of primitive types, needed by the runtime itself
+.link https://github.com/dotnet/coreclr/wiki
+.link https://github.com/dotnet/coreclr/blob/master/Documentation/botr/ryujit-overview.md
+.link https://cmake.org/
 
 * Core API (CoreFX)
 .link https://github.com/dotnet/corefx
 - This repo contains:
-- .NET Core foundational libraries
+- .NET Core foundational libraries (FCL and BCL) - primitive types, string handling, IO etc
 - Classes for collections, file systems, console, XML, async and many others
+- Old FCL contained windows stuff, obviously not here
+- Deprecated old stuff, contains new stuff (System.Buffers)
 .link https://docs.microsoft.com/en-us/dotnet/core/api/index (Note DataSet in index but not in codebase)
 
 
@@ -88,7 +99,21 @@ Billy Stack/Noel McGrath
 * .NET CLI
 .link https://github.com/dotnet/cli
  - This repo contains the .NET Core command-line (CLI) tools, used for building .NET Core apps and libraries through your development flow
+ - Provides dotnet command
  - Show dotnet build
+ 
+* Some other alternatives
+ - CoreRT
+	- alternative to CoreCLR that is optimized for Ahead-Of-Time (AOT) compilation
+	- Has its own variant of mscorlib, will have its own Garbage Collector
+ - LLILC (LLVM MSIL Compiler)
+	- alternative compiler for turning .NET byte-code into machine code
+	- LLVM started out as a step in a C/C++/Objective-C compiler (Clang), but now used by all sorts of languages including Rust, Swift and Rubinius
+	- currently focused on providing an alternative to RyuJIT, placing more emphasis on the optimization of the generated machine code and less on doing the compilation quickly
+	- This makes great sense for applications that are designed to be started infrequently and to run for a long time, e.g. web applications or daemons/services
+	- Core CLR could switch to this, only time will tell
+.link https://github.com/dotnet/corert
+.link https://github.com/dotnet/llilc
 
  
 * Building a Common.NET (.NET Standard)
@@ -154,8 +179,12 @@ Billy Stack/Noel McGrath
 - Work the same on all the Operating Systems
 - dotnet new
 - dotnet restore
+- dotnet build
 - dotnet run
-- TODO Fill out more, Link and examples BS
+- dotnet test
+- dotnet pack
+- dotnet publish
+.link https://docs.microsoft.com/en-us/dotnet/articles/core/tools/dotnet
 
 
 * Web application
@@ -192,14 +221,15 @@ Billy Stack/Noel McGrath
 * Tools and IDE's
 - Visual Studio Code
 - Ionide
-- yoeman? templates
-- PUT IN CMDS bs for install
+- Yeoman
+.link https://docs.asp.net/en/latest/client-side/yeoman.html
 
 
 * Conclusions
 - Noel
 - Possiby too early, e.g. mongodb driver only just released
 - Wait for others to jump in
-- F# is a no, with not mention on the roadmap either
+- F# is a no, with no mention on the roadmap either
 - Billy 
-- TODO
+- Still very sceptical about the whole thing, move in right direction but may not gain traction
+- Still too early to move
