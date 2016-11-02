@@ -5,20 +5,23 @@ Billy Stack/Noel McGrath
 
 
 * Outline TODO: Revisit after all other slides have been done
-- History
-- ASP.NET Core and .NET Core Overview
-- .NET Core and .NET Framework
-- RoadMap
+- The journey
+- .NET Core explained
+- Core CLR, Core API, compilers, CLI
+- .NET Standard
+- Differences between .NET Core and .NET Framework
 - Setup
 - Hello world
 - dotnet commands
-- Web applicaion
+- Web applicaion, Kestrel
 - Tools and IDE
+- Conslusions
 
 
 * Will not cover
 - F# in general
 - ASP.NET in detail
+- Other areas we could cover in more depth
 
 
 * The journey
@@ -60,15 +63,15 @@ Billy Stack/Noel McGrath
 * Core CLR
 - Contains the following:
 - .NET Core runtime, called CoreCLR
-- the base library, called mscorlib. It includes
-- the garbage collector, 
-- JIT compiler, 
+- The base library, called mscorlib. It includes:
+- the garbage collector 
+- JIT compiler
 - base .NET data types
 .link https://github.com/dotnet/coreclr
 
 * Core CLR continued
 - 2.6 million lines of code
-	- Within that count, the JIT is about 320K lines and the GC about 55
+- Within that count, the JIT is about 320K lines and the GC about 55K
 - Includes large collections of C++ and C# code
 - Includes tools that do not ship with Visual Studio, e.g. depends on CMake for building C#/C++ code
 - Very good documentation
@@ -90,28 +93,31 @@ Billy Stack/Noel McGrath
 
 * Language compilers
 -The .NET Compiler Platform ("Roslyn") provides open-source C# and Visual Basic compilers with rich code analysis APIs.
-- https://github.com/dotnet/roslyn
-- https://github.com/dotnet/roslyn
-- https://github.com/Microsoft/visualfsharp
-- https://github.com/fsharp/fsharp
+.link https://github.com/dotnet/roslyn
+.link https://github.com/Microsoft/visualfsharp
+.link https://github.com/fsharp/fsharp
 
 
 * .NET CLI
+- This repo contains the .NET Core command-line (CLI) tools, used for building .NET Core apps and libraries through your development flow
+- Provides dotnet command
 .link https://github.com/dotnet/cli
- - This repo contains the .NET Core command-line (CLI) tools, used for building .NET Core apps and libraries through your development flow
- - Provides dotnet command
- - Show dotnet build
- 
+
+
 * Some other alternatives
- - CoreRT
-	- alternative to CoreCLR that is optimized for Ahead-Of-Time (AOT) compilation
-	- Has its own variant of mscorlib, will have its own Garbage Collector
- - LLILC (LLVM MSIL Compiler)
-	- alternative compiler for turning .NET byte-code into machine code
-	- LLVM started out as a step in a C/C++/Objective-C compiler (Clang), but now used by all sorts of languages including Rust, Swift and Rubinius
-	- currently focused on providing an alternative to RyuJIT, placing more emphasis on the optimization of the generated machine code and less on doing the compilation quickly
-	- This makes great sense for applications that are designed to be started infrequently and to run for a long time, e.g. web applications or daemons/services
-	- Core CLR could switch to this, only time will tell
+- CoreRT
+- alternative to CoreCLR that is optimized for Ahead-Of-Time (AOT) compilation
+- Has its own variant of mscorlib, will have its own Garbage Collector
+ 
+
+* Some other alternatives cont
+- LLILC (LLVM MSIL Compiler)
+- alternative compiler for turning .NET byte-code into machine code
+- LLVM started out as a step in a C/C++/Objective-C compiler (Clang), 
+- but now used by all sorts of languages including Rust, Swift and Rubinius
+- currently focused on providing an alternative to RyuJIT, placing more emphasis on the optimization of the generated machine code and less on doing the compilation quickly
+- This makes great sense for applications that are designed to be started infrequently and to run for a long time, e.g. web applications or daemons/services
+- Core CLR could switch to this, only time will tell
 .link https://github.com/dotnet/corert
 .link https://github.com/dotnet/llilc
 
@@ -220,6 +226,7 @@ Billy Stack/Noel McGrath
 
 * Tools and IDE's
 - Visual Studio Code
+- OmniSharp c# extension
 - Ionide
 - Yeoman
 .link https://docs.asp.net/en/latest/client-side/yeoman.html

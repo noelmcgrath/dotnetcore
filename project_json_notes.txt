@@ -1,1 +1,0 @@
-project.lock.json - contains all dependency versions that was downloaded by the restore, the package dependencies (without versions) are specified in project.json
